@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_21_000716) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_171431) do
   create_table "activity_entries", force: :cascade do |t|
     t.string "activity_type"
     t.integer "duration"
@@ -50,6 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_000716) do
     t.string "string"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "activity_entries", "cats"
