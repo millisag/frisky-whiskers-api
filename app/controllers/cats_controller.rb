@@ -1,50 +1,42 @@
 class CatsController < ApplicationController
-    before_action :set_user, only: [:index, :create, :show, :update, :destroy]  # run for all actions
-    before_action :set_cat, only: [:show, :update, :destroy]
-  
     def index
-      Rails.logger.debug "params: #{params.inspect}"
-      render json: CatBlueprint.render(@user.cats)
+      cats = @current_user.cats
+      render json: cats
     end
   
     def show
-      render json: CatBlueprint.render(@cat, view: :with_entries)
+      cat = @current_user.cats.find(params[:id])
+      render json: cat
     end
   
     def create
-      @cat = @user.cats.build(cat_params)
-      if @cat.save
-        render json: CatBlueprint.render(@cat), status: :created
+      cat = @current_user.cats.build(cat_params)
+      if cat.save
+        render json: cat, status: :created
       else
-        render json: @cat.errors, status: :unprocessable_entity
+        render json: { errors: cat.errors.full_messages }, status: :unprocessable_entity
       end
     end
   
     def update
-      if @cat.update(cat_params)
-        render json: CatBlueprint.render(@cat)
+      cat = @current_user.cats.find(params[:id])
+      if cat.update(cat_params)
+        render json: cat
       else
-        render json: @cat.errors, status: :unprocessable_entity
+        render json: { errors: cat.errors.full_messages }, status: :unprocessable_entity
       end
     end
   
     def destroy
-      @cat.destroy
+      cat = @current_user.cats.find(params[:id])
+      cat.destroy
       head :no_content
     end
   
     private
   
-    def set_user
-      @user = User.find(params[:user_id])
-    end
-  
-    def set_cat
-      @cat = @user.cats.find(params[:id])  # user-scoped cat
-    end
-  
     def cat_params
-      params.require(:cat).permit(:name, :age, :weight, :breed, :color)
+      params.require(:cat).permit(:name, :age, :breed)
     end
   end
   

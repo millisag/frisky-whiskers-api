@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "jwt", "~> 2.6"
+
 gem "blueprinter", "~> 1.0"
 
 gem "bcrypt", "~> 3.1.7"

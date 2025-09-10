@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get "users/create"
+  # get "sessions/create"
+  # get "users/create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -8,11 +9,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  post '/login', to: 'sessions#create'
   resources :users do
-    resources :cats, only: [:index, :show, :create, :update, :destroy]
+    resources :users, only: [:create, :show, :update, :destroy]
   end
 
-  resources :cats, only: [] do
+  resources :cats, only: [:index, :show, :create, :update, :destroy] do
     resources :food_entries, only: [:index, :create, :show, :update, :destroy]
     resources :activity_entries, only: [:index, :create, :show, :update, :destroy]
   end
