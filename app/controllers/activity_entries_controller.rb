@@ -12,7 +12,12 @@ class ActivityEntriesController < ApplicationController
         else
           render json: entry.errors, status: :unprocessable_entity
         end
-      end      
+      end
+      def destroy
+        entry = @cat.activity_entries.find(params[:id])
+        entry.destroy
+        head :no_content
+      end   
   
     private
   
