@@ -54,5 +54,5 @@ group :development, :test do
 
   gem "faker", "~> 2.20"
 
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot_rails", "~> 6.5"
 end
