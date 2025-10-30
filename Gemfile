@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "jwt", "~> 2.6"
+gem "jwt", "~> 3.1"
 
 gem "blueprinter", "~> 1.0"
 
